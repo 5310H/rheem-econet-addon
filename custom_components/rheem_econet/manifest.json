@@ -5,9 +5,9 @@
   "config_flow": true,
   "dependencies": ["http"],
   "documentation": "https://github.com/5310H/rheem-econet-addon/blob/main/README.md",
-  "issue_tracker": "https://github.com/5310H/rheem-econet-addon/issues",
   "integration_type": "device",
   "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/5310H/rheem-econet-addon/issues",
   "requirements": ["pyserial==3.5"],
   "version": "0.2.0"
 }
