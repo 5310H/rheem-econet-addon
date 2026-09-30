@@ -1,0 +1,31 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Rheem EcoNet Tankless",
+        "description": "Use the USB-to-RS-485 adapter device path detected by Home Assistant OS, such as /dev/serial/by-id/....",
+        "data": {
+          "port": "USB serial adapter",
+          "source_address": "EcoNet source address",
+          "destination_address": "Heater address",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "Enter source and heater addresses as decimal or 0x-prefixed hexadecimal values.",
+      "invalid_port": "Enter a serial device path, such as /dev/serial/by-id/your-adapter."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Rheem EcoNet Tankless options",
+        "data": {
+          "port": "USB serial adapter",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    }
+  }
+}
