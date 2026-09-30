@@ -17,6 +17,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
+    CONTROLLER_REVISION,
     DOMAIN,
     DP_BTUS,
     DP_FLOW_RATE,
@@ -26,7 +27,6 @@ from .const import (
     DP_WATER_USED,
     MANUFACTURER,
     MODEL,
-    PRODUCT_NUMBER,
 )
 
 
@@ -114,7 +114,7 @@ class RheemEcoNetSensor(CoordinatorEntity, SensorEntity):
             "identifiers": {(DOMAIN, entry.entry_id)},
             "manufacturer": MANUFACTURER,
             "model": MODEL,
-            "hw_version": PRODUCT_NUMBER,
+            "hw_version": CONTROLLER_REVISION,
             "name": "Rheem Prestige Tankless Water Heater",
         }
 

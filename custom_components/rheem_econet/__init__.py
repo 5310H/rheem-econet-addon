@@ -31,7 +31,7 @@ PLATFORMS: list[Platform] = [Platform.CLIMATE, Platform.SENSOR]
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 _LOGGER = logging.getLogger(__name__)
 _PANEL_PATH = "rheem-water-heater"
-_PANEL_JS_URL = "/rheem_econet/panel.js?v=0.2.0"
+_PANEL_JS_URL = "/rheem_econet/panel.js?v=0.2.1"
 _STATIC_REGISTERED = "frontend_static_registered"
 _PANEL_REGISTERED = "frontend_panel_registered"
 

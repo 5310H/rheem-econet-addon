@@ -16,6 +16,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
+    CONTROLLER_REVISION,
     DOMAIN,
     DP_ENABLE,
     DP_SETPOINT,
@@ -24,7 +25,6 @@ from .const import (
     MAX_TEMPERATURE,
     MIN_TEMPERATURE,
     MODEL,
-    PRODUCT_NUMBER,
 )
 from .protocol import EcoNetSerialClient
 
@@ -59,7 +59,7 @@ class RheemTanklessClimate(CoordinatorEntity, ClimateEntity):
             "identifiers": {(DOMAIN, entry.entry_id)},
             "manufacturer": MANUFACTURER,
             "model": MODEL,
-            "hw_version": PRODUCT_NUMBER,
+            "hw_version": CONTROLLER_REVISION,
             "name": "Rheem Prestige Tankless Water Heater",
         }
 
