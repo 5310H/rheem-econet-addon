@@ -23,6 +23,8 @@ The packet-level information used here is community-derived: see the [ESPHome ta
 
 The water-heater climate entity is intended to expose Off/Heat and a target range of 110–140 °F, matching the tankless ESPHome profile. The integration writes the `WHTRENAB` and `WHTRSETP` datapoints. The setpoint is a water-heater setting; it does not operate the gas valve directly. The public profile uses `WHTRENAB` values 0=OFF and 1=HEAT. Upstream ESPHome sends writes without waiting for a protocol ACK, so this integration treats a write as a command attempt and relies on a later poll to observe whether the requested state took effect. That behavior is not yet verified against this heater.
 
+The integration also adds a **Rheem Water Heater** page to the Home Assistant sidebar. It shows connection state, outlet and target temperatures, and the integration's sensor readings, with temperature and Off/Heat controls when the heater is responding. These controls call the same Home Assistant climate services as the device page. Recirculation pump control is not included because its EcoNet command has not been verified for this model and revision.
+
 ## What needs the installed heater
 
 - Confirm the correct physical RS-485 terminals/pinout and electrical compatibility for this unit.
