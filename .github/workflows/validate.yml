@@ -3,6 +3,7 @@ name: Validate HACS integration
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   protocol-tests:
