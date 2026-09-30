@@ -40,3 +40,7 @@ Until then, consider this experimental software. Do not use write-based automati
 The serial transport and datapoint mapping are isolated under `custom_components/rheem_econet/`. Contributions and reports should include heater model, product number, controller revision, and sanitized protocol diagnostics. Do not post serial numbers, Wi-Fi credentials, or unredacted account details.
 
 The Home Assistant Python package in `.venv-ha` is for local development checks only. It does not install files on the HAOS machine; install this repository on HAOS through HACS.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).

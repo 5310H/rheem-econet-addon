@@ -3,6 +3,7 @@
   "name": "Rheem EcoNet Tankless",
   "codeowners": ["@5310H"],
   "config_flow": true,
+  "dependencies": ["http"],
   "documentation": "https://github.com/5310H/rheem-econet-addon/blob/main/README.md",
   "issue_tracker": "https://github.com/5310H/rheem-econet-addon/issues",
   "integration_type": "device",

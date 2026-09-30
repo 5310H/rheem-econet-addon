@@ -14,6 +14,7 @@ from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
@@ -27,6 +28,7 @@ from .const import (
 from .protocol import EcoNetProtocolError, EcoNetSerialClient
 
 PLATFORMS: list[Platform] = [Platform.CLIMATE, Platform.SENSOR]
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 _LOGGER = logging.getLogger(__name__)
 _PANEL_PATH = "rheem-water-heater"
 _PANEL_JS_URL = "/rheem_econet/panel.js?v=0.2.0"
