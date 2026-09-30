@@ -23,12 +23,21 @@ The packet-level information used here is community-derived: see the [ESPHome ta
 
 The water-heater climate entity is intended to expose Off/Heat and a target range of 110–140 °F, matching the tankless ESPHome profile. The integration writes the `WHTRENAB` and `WHTRSETP` datapoints. The setpoint is a water-heater setting; it does not operate the gas valve directly. The public profile uses `WHTRENAB` values 0=OFF and 1=HEAT. Upstream ESPHome sends writes without waiting for a protocol ACK, so this integration treats a write as a command attempt and relies on a later poll to observe whether the requested state took effect. That behavior is not yet verified against this heater.
 
-The integration also adds a **Rheem Water Heater** page to the Home Assistant sidebar. It shows connection state, outlet and target temperatures, and the integration's sensor readings, with temperature and Off/Heat controls when the heater is responding. These controls call the same Home Assistant climate services as the device page. Recirculation pump control is not included because its EcoNet command has not been verified for this model and revision.
+The integration also adds a **Rheem Water Heater** page to the Home Assistant sidebar. It shows connection state, outlet and target temperatures, and the integration's sensor readings, with temperature and Off/Heat controls when the heater is responding. These controls call the same Home Assistant climate services as the device page.
+
+### Recirculation pump
+
+This integration does not control the recirculation pump. The ESPHome tankless profile does not expose a pump control. In an [upstream discussion](https://github.com/esphome-econet/esphome-econet/discussions/558), attempts to write `RCIRPUMP` and `RPUMPMOD` changed displayed state but did not start the pump; a maintainer also reported the values could remain stuck. Do not use those datapoints as pump commands.
+
+Rheem's [RTGH use and care manual](https://files.rheem.com/blobazrheem/wp-content/uploads/sites/2/RTGH-Use-and-Care-Manual.pdf) documents an optional push-button input, connector CN3 (`SMW250-06`), pins 1 and 2, identified as SELV 5 V. Rheem lists its wired push-button accessory for on-demand recirculation on RTGH-RH models in its [tankless product guide](https://files.myrheem.com/webpartners/ProductDocuments/61FC6DCA-20B4-443F-A46B-3B86D6FAF1BD.pdf). This points to a physical button input as the viable on-demand path, rather than an established RS-485 command. The exact board connector and behavior still need confirmation on RTGH-RH11DVLN controller revision 00.06. Do not connect a guessed GPIO or relay directly; use an isolated, normally-open momentary contact interface only after confirming the exact pins and electrical behavior.
+
+Because the current integration communicates only over USB-to-RS-485, it cannot operate that separate push-button input by itself. Adding pump control would require a separately HA-controlled relay/interface or a verified EcoNet command, followed by testing on the installed heater.
 
 ## What needs the installed heater
 
 - Confirm the correct physical RS-485 terminals/pinout and electrical compatibility for this unit.
 - Verify serial framing, read ACK parsing, datapoint types, CRC, and write/read-back behavior against controller revision 00.06.
+- Identify the optional push-button connector on the actual control board and verify a safe isolated contact-closure method for on-demand recirculation.
 - Verify that Home Assistant OS exposes the chosen USB adapter as a stable serial device.
 - Test reads, setpoint changes, and enable/disable behavior while monitoring the heater.
 - Confirm any stock EcoNet module interaction on this exact appliance before depending on writes. Upstream has a report that writes are safe alongside the stock module on a different model, but this is not unit-specific validation.

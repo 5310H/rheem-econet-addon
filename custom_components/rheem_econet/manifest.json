@@ -9,5 +9,5 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/5310H/rheem-econet-addon/issues",
   "requirements": ["pyserial==3.5"],
-  "version": "0.2.1"
+  "version": "0.2.2"
 }

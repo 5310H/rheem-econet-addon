@@ -156,7 +156,7 @@ class RheemEcoNetPanel extends HTMLElement {
             <article class="card">
               <h2>Connection</h2>
               <div>${isAvailable ? "The heater is responding over the local serial connection." : "Connect the USB-to-RS-485 adapter to HAOS and the heater bus. This page will update when the heater responds."}</div>
-              <div class="notice">Recirculation pump control is not available yet. Use the heater’s built-in recirculation settings until its EcoNet command is verified.</div>
+              <div class="notice">Recirculation pump control is not exposed over a verified EcoNet command. The Rheem manual lists a separate optional push-button input; confirm the exact board wiring before connecting an isolated contact interface.</div>
             </article>
           </section>
         ` : `
