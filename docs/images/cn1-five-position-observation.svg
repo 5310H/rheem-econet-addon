@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" role="img" aria-labelledby="title desc">
+  <title id="title">Observed five-position Rheem CN1 connector</title>
+  <desc id="desc">Illustrative five-position connector. A dot at the right end is a possible pin-one marker. Signal assignments are not confirmed for the photographed board.</desc>
+  <rect width="900" height="330" rx="20" fill="#f4f7fa"/>
+  <text x="42" y="54" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#172b3a">CN1 connector — observed arrangement</text>
+  <text x="42" y="88" font-family="Arial, sans-serif" font-size="17" fill="#405565">Illustration from the owner-provided close-up; not a photograph or a confirmed pinout.</text>
+  <rect x="130" y="125" width="568" height="114" rx="18" fill="#dce4e9" stroke="#758795" stroke-width="4"/>
+  <g fill="#34495a" stroke="#182b37" stroke-width="3">
+    <circle cx="200" cy="182" r="25"/><circle cx="300" cy="182" r="25"/>
+    <circle cx="400" cy="182" r="25"/><circle cx="500" cy="182" r="25"/>
+    <circle cx="600" cy="182" r="25"/>
+  </g>
+  <g fill="#f4f7fa" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">
+    <text x="200" y="188">5</text><text x="300" y="188">4</text>
+    <text x="400" y="188">3</text><text x="500" y="188">2</text>
+    <text x="600" y="188">1?</text>
+  </g>
+  <circle cx="735" cy="182" r="9" fill="#e24636"/>
+  <line x1="735" y1="160" x2="735" y2="121" stroke="#e24636" stroke-width="3"/>
+  <text x="735" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#a42e24">possible pin-1 mark</text>
+  <text x="42" y="286" font-family="Arial, sans-serif" font-size="17" fill="#8b3129">Pin numbers and orientation must be confirmed against the exact board revision before wiring.</text>
+</svg>

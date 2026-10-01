@@ -8,6 +8,32 @@ This is an early integration and has not yet been validated against a physical h
 
 The initial hardware target supplied for development is **RTGH-RH11DVLN**, product **689371**, controller revision **00.06**. The integration is designed to provide a climate control for water-heater enable/setpoint and sensors for inlet/outlet temperature, flow, water usage, gas usage, and ignition cycles. These datapoints are inherited from the ESPHome tankless profile; support for this exact product and revision has not been confirmed on a live heater. Verify reads and control writes before relying on automations.
 
+## Physical connector evidence
+
+The owner-provided control-board close-up shows a five-position connector identified as **CN1 / RS-485** on the cabinet wiring diagram. A small dot/mark appears at one end and may identify pin 1; use the board silkscreen and connector orientation to verify that, since a connector viewed from its wire side can be mirrored. The uploaded images are not stored in this repository yet. The following drawing records the observed five-position arrangement; it is an orientation aid, not a photograph or a verified pinout.
+
+![Illustration of the observed five-position CN1 connector and possible pin-1 marker](docs/images/cn1-five-position-observation.svg)
+
+There is a documentation mismatch that must be resolved before wiring:
+
+- The [Rheem RTGH-RH11DV manual](https://files.myrheem.com/webpartners/ProductDocuments/7496DB1F-380B-46AC-951E-BA17CA39DF8A.pdf) identifies controller **NGTH-9700C** and lists **CN1, part SMW250-03**, as a three-position connector: pin 1 = RS-485+, pin 2 = GND, pin 3 = RS-485−.
+- A separate [Infiniti GR installation-manual copy](https://device.report/m/234349ef29b723e3262b36cd8182a85953f5f1648555bd19c3df8a3ce24be25a_optim.pdf) describes a five-position CN1 with RS-485 signals on pins 1/2 and 4/5 and pin 3 unused. That is a different documented connector variant; it has **not** been matched to this heater's board revision.
+- The [ESPHome-EcoNet hardware guide](https://github.com/esphome-econet/esphome-econet/wiki/Recommended-Hardware-Purchase-and-Setup-Instructions) documents a separate RJ11/RJ12 connection: jack pin 3 = B−, pin 4 = A+, and pin 5 = GND. Those jack pin numbers are not CN1 header pin numbers.
+- An unverified pinout proposal describes this observed five-position header as pin 1 = +12 V, pin 2 = GND, pin 3 = RS-485 A, pin 4 = RS-485 B, pin 5 = shield/NC. No Rheem source located so far supports these assignments for controller revision **RHe_V0106**. Do not apply its suggested red/black/white/green wiring.
+
+The RTGH-RH11DV manual is the best primary source found so far, but it does not establish that the five-position connector shown in the owner-provided photo is the same three-position CN1 it documents, or that its pinout applies to revision **RHe_V0106**. The pin-1 marker alone cannot identify the other signals. **Do not connect the USB-RS485 adapter or any supply to the observed five-position header until Rheem confirms the connector and pin functions for this exact board revision.** In particular, do not inject 5 V or 12 V into an unverified pin. The proposed continuity/voltage-probing procedure is also inconclusive: chassis or RJ-jack shield continuity does not by itself prove signal ground, and averaged RS-485 line voltages do not reliably identify A/B.
+
+### Question for Rheem
+
+For the **RTGH-RH11DVLN**, product **689371**, with control board marked **NGTH-9700C / RHe_V0106**, please confirm:
+
+1. Whether the five-position connector visible in the attached/owner-observed board photo is **CN1** and is intended for RS-485.
+2. The pin numbering/orientation and electrical function of every position, including whether any pin supplies power and its voltage/current rating.
+3. The correct mating connector series/part number and whether this board revision differs from the three-position **CN1 / SMW250-03** shown in the RTGH-RH11DV manual.
+4. Whether the RJ11/RJ12 jack is an approved alternative RS-485 connection for this exact model/revision, including its pinout and signal-ground requirements.
+
+The original board photos should accompany this question; they are not included in this repository because they were not available as files in the workspace when this note was prepared.
+
 ## Install and try through HACS
 
 1. In HACS, open **⋮ → Custom repositories**, enter `https://github.com/5310H/rheem-econet-addon`, and choose **Integration**. Install **Rheem EcoNet Tankless** and restart Home Assistant. This repository is a HACS custom integration, not a Home Assistant add-on.
@@ -35,7 +61,7 @@ Because the current integration communicates only over USB-to-RS-485, it cannot 
 
 ## What needs the installed heater
 
-- Confirm the correct physical RS-485 terminals/pinout and electrical compatibility for this unit.
+- Obtain Rheem's written confirmation of the five-position connector and pinout for board revision RHe_V0106 before connecting any adapter or power source.
 - Verify serial framing, read ACK parsing, datapoint types, CRC, and write/read-back behavior against controller revision 00.06.
 - Identify the optional push-button connector on the actual control board and verify a safe isolated contact-closure method for on-demand recirculation.
 - Verify that Home Assistant OS exposes the chosen USB adapter as a stable serial device.
